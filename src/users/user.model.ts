@@ -1,7 +1,9 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { Role } from "src/roles/role.module";
+import { UsersRoles } from "src/roles/users-roles.model";
 
 interface AtrrUser{
-    email : string;
+    email : string,
     password : string
 }
 
@@ -16,9 +18,12 @@ export class User extends Model<User, AtrrUser>{
     @Column({type : DataType.STRING, allowNull : false})
     password : string;
 
-    @Column({type : DataType.BOOLEAN})
+    @Column({type : DataType.BOOLEAN, defaultValue : false})
     banned : boolean;
 
-    @Column({type : DataType.STRING})
-    bannReason : string
+    @Column({type : DataType.STRING, allowNull : true})
+    bannReason : string;
+
+    @BelongsToMany(() => Role, () => UsersRoles)
+    roles : Role[]
 }
