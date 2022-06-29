@@ -1,6 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { FilesModule } from "./files/files.module";
+import { Post } from "./posts/post.module";
+import { PostsModule } from "./posts/posts.module";
 import { Role } from "./roles/role.module";
 import { RolesModule } from "./roles/roles.module";
 import { UsersRoles } from "./roles/users-roles.model";
@@ -21,10 +24,10 @@ import { UsersModule } from "./users/users.module";
           username: process.env.DB_USER,
           password: process.env.DB_PASSWORD,
           database: process.env.DB_NAME,
-          models: [User, Role, UsersRoles],
+          models: [User, Role, UsersRoles, Post],
           autoLoadModels : true
         }),
-        UsersModule, RolesModule
+        UsersModule, RolesModule, PostsModule
       ],
     
 })

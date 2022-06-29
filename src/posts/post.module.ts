@@ -1,8 +1,8 @@
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface AtrrPost{
-    title : string
-    content : string
+    title : string,
+    content : string,
     image : string   
 }
 
@@ -20,8 +20,7 @@ export class Post extends Model<Post,AtrrPost>{
     @Column({type : DataType.STRING, allowNull : false})
     image : string;
 
-    @Column({type : DataType.STRING, validate:{isIn : [['public', 'hidden']]} , defaultValue : 'public'})
+    //@Column({type : DataType.STRING, validate:{isIn : [['public', 'hidden']], msg : 'Must be public or hidden'} , defaultValue : 'public'})
+    @Column({type : DataType.STRING, defaultValue : 'public'})
     status : string;
-
-
 }
