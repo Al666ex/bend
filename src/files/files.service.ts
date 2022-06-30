@@ -14,8 +14,6 @@ export class FilesService {
                 fs.mkdirSync(filePath, {recursive : true})
             }
             fs.writeFileSync(path.join(filePath,fileName), file.buffer)
-            console.log(fileName)
-            console.log(filePath)
             return fileName
                 
         } catch (error) {

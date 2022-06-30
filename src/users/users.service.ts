@@ -11,7 +11,8 @@ export class UsersService {
     async createUser(dto : UserDto){
         try {
             const user = await this.userModel.create(dto)
-            const role = await this.roleService.getRole('BLOGGER')                           
+            const role = await this.roleService.getRoleByValue('BLOGGER')
+            //const role = await this.roleService.getRoleByValue('ADMIN')                                     
             await user.$set('roles', [role.id])
             user.roles = [role]
             return user
@@ -20,4 +21,17 @@ export class UsersService {
             throw new HttpException('Ошибка создания пользователя ', HttpStatus.BAD_REQUEST)            
         }
     }
+
+    async getAllUsers(){
+        //const users = await this.userModel.findAll({include : {all : true}})
+        const users = await this.userModel.findAll({include : {all : true}})
+        return users
+    }
+
+    async getUserByEmail(email : string){
+        const user = await this.userModel.findOne({where : {email}, include : {all : true}})
+        return user
+    }
+
+    
 }

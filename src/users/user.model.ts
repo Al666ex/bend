@@ -1,4 +1,5 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Post } from "src/posts/post.module";
 import { Role } from "src/roles/role.module";
 import { UsersRoles } from "src/roles/users-roles.model";
 
@@ -26,6 +27,9 @@ export class User extends Model<User, AtrrUser>{
 
     @BelongsToMany(() => Role, () => UsersRoles)
     roles : Role[]
+
+    @HasMany(() => Post)
+    posts : Post[]
 
     
 }
