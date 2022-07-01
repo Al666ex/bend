@@ -34,7 +34,9 @@ export class RolesGuard implements CanActivate {
         request.user = user
         return user.roles.some(role => roles.includes(role.value));            
     } catch (error) {
-        throw new HttpException('Access denied ', HttpStatus.BAD_REQUEST)    
+        throw new HttpException('Access denied ', HttpStatus.FORBIDDEN)    
     }
   }
 }
+
+

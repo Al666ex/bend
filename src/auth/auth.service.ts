@@ -17,8 +17,9 @@ export class AuthService {
 
     private async validator(dto : UserDto){
         const user = await this.userService.getUserByEmail(dto.email)
-        const comparePsw = await bcrypt.compare(dto.password, user.password)
-        if(user && comparePsw){
+        const comparePsw = await bcrypt.compare(dto.password, user.password)        
+        const acceptRole = user.roles.some(role => process.env.ACCEPT_ROLES.includes(role.value))
+        if(user && comparePsw && acceptRole){
             return user
         }
         throw new UnauthorizedException('Unauthorized user or wrong user/password')
