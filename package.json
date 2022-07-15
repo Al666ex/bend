@@ -27,6 +27,7 @@
     "@nestjs/jwt": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/sequelize": "^8.0.1",
+    "@nestjs/swagger": "^6.0.4",
     "bcryptjs": "^2.4.3",
     "cross-env": "^7.0.3",
     "pg": "^8.7.3",

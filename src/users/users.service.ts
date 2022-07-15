@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { PosUpdateDto } from 'src/posts/dto/post.update.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { AddRoleDto } from './dto/add.role';
 import { UserDto } from './dto/user.dto';
@@ -43,5 +44,7 @@ export class UsersService {
             return dto
         }
         throw new HttpException('USER or ROLE not found', HttpStatus.NOT_FOUND)            
-    }    
+    }
+
+
 }
