@@ -10,7 +10,6 @@ import { Post } from './post.module';
 @Injectable()
 export class PostsService {
 
-
     constructor(@InjectModel(Post) private postRepository : typeof Post,
                                    private userService : UsersService
     ){}
@@ -62,9 +61,19 @@ export class PostsService {
     }
 
     async postsOwner(email: string) {
-        const user = await this.userService.getUserByEmail(email);
+        const user = await this.userService.getUserByEmail(email);        
         return user.posts
     }
+
+    async deletePublicPost(idPost: string) {        
+        const post = await this.postRepository.findByPk(idPost)
+        if(post.status === 'private'){
+            throw new HttpException(`Post has status ${post.status}. This post can only be deleted by the owner`, HttpStatus.BAD_REQUEST)
+        }
+
+        await this.postRepository.destroy({where : {id : idPost}})
+        return post
+    }    
 
     private generatePublicPosts(user){
         let arr = []    

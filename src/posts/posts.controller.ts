@@ -45,7 +45,7 @@ export class PostsController {
         return updateStat;
     }
 
-    @ApiOperation({summary : 'Delete post'})
+    @ApiOperation({summary : 'The owner deletes his post'})
     @ApiResponse({status:200})
     @Delete('/:email/:idPost')
     async delete(@Param('email') email : string, @Param('idPost') idPost : string){
@@ -66,4 +66,14 @@ export class PostsController {
     postsOwner(@Param('email') email : string){
         return this.postService.postsOwner(email)
     }
+
+    @ApiOperation({summary : 'ADMIN delete public post'})
+    @ApiResponse({status:200})
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)      
+    @Delete('/:idPost')
+    async deletePublicPost(@Param('idPost') idPost : string){
+        const deletePublicPost = await this.postService.deletePublicPost(idPost)
+        return deletePublicPost
+    }    
 }

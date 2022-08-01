@@ -31,16 +31,17 @@ export class UsersController {
         return users;
     }
 
-    /*
+    
     @ApiOperation({summary : 'БОНУС !!! Добавление роли пользователю'})
-    @ApiResponse({status : 200, type : User})        
+    //@ApiResponse({status : 200, type : User})        
+    @ApiResponse({status : 200, type : AddRoleDto})        
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
     @Post('/roles')
     addRoleToUser(@Body() dto : AddRoleDto){
         return this.userService.addRoleToUser(dto)
     }
-    */
+    
 
 
 
