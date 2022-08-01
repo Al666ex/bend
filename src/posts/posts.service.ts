@@ -67,6 +67,10 @@ export class PostsService {
 
     async deletePublicPost(idPost: string) {        
         const post = await this.postRepository.findByPk(idPost)
+        if(!post){
+            throw new HttpException('Post not found', HttpStatus.NOT_FOUND)
+        }
+
         if(post.status === 'private'){
             throw new HttpException(`Post has status ${post.status}. This post can only be deleted by the owner`, HttpStatus.BAD_REQUEST)
         }
